@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nikhil Plantation Pvt. Ltd.</title>
+<style>
+
+/* Scroll To Top Button */
+
+#scrollTopBtn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: rgba(220, 245, 215, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(20, 60, 20, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s ease;
+  z-index: 9999;
+  animation: floatBtn 3s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes floatBtn {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Show button */
+#scrollTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Leaf icon */
+.leaf-icon {
+  position: absolute;
+  font-size: 1.6rem;
+  color: #1c3a1c;
+  transition: 0.4s;
+}
+
+/* Hover */
+#scrollTopBtn:hover {
+  transform: translateY(-10px) scale(1.1);
+  background: #c8f0b5;
+  box-shadow: 0 15px 40px rgba(15, 45, 15, 0.7);
+}
+
+@media (hover: none) {
+  #scrollTopBtn:hover {
+    transform: none;
+  }
+}
+
+
+#scrollTopBtn:hover .leaf-icon {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* Progress ring */
+.progress-ring {
+  position: absolute;
+  transform: rotate(-90deg);
+}
+
+.progress-ring__circle {
+  stroke: #2e6a2e;
+  stroke-dasharray: 163;
+  stroke-dashoffset: 163;
+  transition: stroke-dashoffset 0.2s linear, stroke 0.4s;
+}
+
+/* Scroll color change */
+#scrollTopBtn.scrolled-mid .progress-ring__circle {
+  stroke: #4caf50;
+}
+
+#scrollTopBtn.scrolled-deep .progress-ring__circle {
+  stroke: #1b5e20;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  #scrollTopBtn {
+    width: 52px;
+    height: 52px;
+    bottom: 25px;
+    right: 20px;
+  }
+  .leaf-icon { font-size: 1.4rem; }
+}
+
+
+/* Reset */
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body {background: linear-gradient(135deg,#a8d5ba,#c9e4ca);color:#1e2f20;line-height:1.6;overflow-x:hidden;scroll-behavior:smooth;}
+a{text-decoration:none;position:relative;color:#234d20;transition:.3s;}
+a::after{content:'';position:absolute;width:0;height:2px;bottom:-3px;left:0;background:#234d20;transition:.3s;}
+a:hover::after{width:100%;}
+/* Glass container */
+.glass{
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border:1px solid rgba(255,255,255,0.25);
+  box-shadow:0 8px 32px rgba(0,0,0,0.1);
+  padding:20px;
+}
+/* Navigation */
+
+nav .logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  font-size:1.6rem;
+  letter-spacing:1.5px;
+}
+
+nav .logo img{
+  height:48px;
+  width:auto;
+  object-fit:contain;
+  border-radius: 50%;
+}
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:999;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter:blur(12px);
+  box-shadow:0 8px 32px rgba(0,0,0,0.1);
+}
+nav .logo{font-weight:900;font-size:1.8rem;letter-spacing:2px;}
+nav ul{display:flex;gap:25px;list-style:none;transition:0.4s;}
+nav ul li a{font-weight:600;color:#234d20;}
+nav ul li a:hover{color:#147a0e;}
+/* Hamburger */
+.hamburger{
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+  gap:6px;
+}
+.hamburger div{
+  width:28px;
+  height:3px;
+  background:#234d20;
+  border-radius:2px;
+  transition:0.3s;
+}
+.hamburger.active div:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.active div:nth-child(2){opacity:0;}
+.hamburger.active div:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+
+/* Hero */
+header{
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80')center/cover no-repeat;
+  height:100vh;display:flex;justify-content:center;align-items:center;
+  overflow:hidden;
+}
+header::before{content:'';position:absolute;inset:0;background:rgba(32,65,32,0.5);}
+header .hero-content{
+  position:relative;z-index:2;text-align:center;color:#e6f0db;
+  padding:40px 30px;border-radius:25px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter:blur(6px);box-shadow:0 8px 32px rgba(0,0,0,0.15);
+  animation:fadeInUp 1s ease forwards;
+}
+header h1{font-size:3.6rem;font-weight:900;margin-bottom:18px;text-shadow:2px 3px 10px rgba(10,40,10,0.6);}
+header p{font-size:1.4rem;margin-bottom:30px;text-shadow:1px 1px 6px rgba(10,30,10,0.5);}
+header .btn-primary{
+  background: rgba(37,99,37,0.7);color:#e6f0db;padding:15px 42px;font-weight:700;
+  border-radius:40px;border:2px solid rgba(255,255,255,0.3);cursor:pointer;
+  box-shadow:0 6px 18px rgba(30,70,30,0.7);transition:.4s;
+}
+header .btn-primary:hover{
+  background: rgba(37,99,37,0.7);box-shadow:0 10px 30px rgba(10,30,10,0.9);border-color:#d9f0c6;color:#d9f0c6;
+}
+
+/* Floating leaves in hero */
+.leaf{
+  position:absolute;
+  width:40px;
+  height:40px;
+  background: url('https://img.icons8.com/emoji/48/000000/leaf-emoji.png') no-repeat center/contain;
+  animation:float linear infinite;
+  opacity:0.8;
+  z-index:1;
+}
+@keyframes float{
+  0%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-50px) rotate(180deg);}
+  100%{transform:translateY(-120vh) rotate(360deg);}
+}
+
+/* Falling leaves across page */
+.falling-leaf{
+  position:fixed;
+  top:-50px;
+  width:25px;
+  height:25px;
+  background: url('https://img.icons8.com/emoji/48/000000/leaf-emoji.png') no-repeat center/contain;
+  opacity:0.7;
+  pointer-events:none;
+  z-index:0;
+  animation-name:fall;
+  animation-iteration-count:infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0deg);}
+  100%{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* Sections */
+section{padding:70px 20px;max-width:1100px;margin:0 auto;}
+section h2{text-align:center;font-size:3rem;margin-bottom:50px;color:#234d20;font-weight:900;}
+/* About */
+#about{display:flex;flex-wrap:wrap;gap:40px;justify-content:center;align-items:center;padding:40px;background:rgba(255,255,255,0.18);backdrop-filter:blur(10px);border-radius:25px;box-shadow:0 8px 32px rgba(31,38,135,0.15);}
+#about .about-img{flex:1 1 400px;max-width:420px;border-radius:25px;overflow:hidden;transition:.4s;}
+#about .about-img img{width:100%;height:100%;object-fit:cover;transition:.4s;}
+#about .about-img:hover img{transform:scale(1.05);}
+#about .about-text{flex:1 1 400px;max-width:600px;font-size:1.2rem;line-height:1.7;font-weight:600;color:#1c3421;}
+#about .about-text strong{color:#2c6a2c;font-weight:900;}
+#about .about-text p + p{margin-top:1.2em;}
+/* Services */
+#services{display:flex;flex-wrap:wrap;justify-content:center;gap:32px;}
+.service-card{background:rgba(255,255,255,0.12);border-radius:25px;padding:32px;width:280px;backdrop-filter:blur(12px);box-shadow:0 8px 36px rgba(20,60,20,0.15);transition:.3s;color:#234d20;cursor:default;display:flex;flex-direction:column;justify-content:flex-start;}
+.service-card:hover,.service-card:focus{transform:translateY(-14px);box-shadow:0 18px 48px rgba(15,45,15,0.35);outline:none;}
+.service-card h3{margin-bottom:18px;font-size:1.5rem;font-weight:900;}
+.service-card p{font-size:1.05rem;color:#2c5230;flex-grow:1;font-weight:600;}
+/* Gallery */
+
+#gallery img{width:100%;border-radius:25px;box-shadow:0 10px 30px rgba(20,60,20,0.3);cursor:pointer;transition:.6s transform;}
+#gallery img:hover{transform:scale(1.07);filter:brightness(1.05);}
+/* Contact */
+#contact{max-width:650px;margin:0 auto;padding:40px;border-radius:25px;background:rgba(255,255,255,0.18);backdrop-filter:blur(12px);color:#234d20;box-shadow:0 10px 36px rgba(20,60,20,0.25);}
+#contact form{display:flex;flex-direction:column;gap:22px;}
+#contact label{font-weight:800;font-size:1.15rem;}
+#contact input,#contact textarea{padding:15px 18px;border-radius:16px;border:1.8px solid rgba(20,60,20,0.3);font-size:1.1rem;font-weight:600;background:rgba(255,255,255,0.25);backdrop-filter:blur(5px);}
+#contact input::placeholder,#contact textarea::placeholder{color:#3b6d3b;font-style:italic;font-weight:500;}
+#contact input:focus,#contact textarea:focus{outline:none;border-color:#2e6a2e;box-shadow:0 0 10px #2e6a2e;background:rgba(255,255,255,0.35);}
+#contact button{background:rgba(33,85,33,0.8);color:#e4f0d1;font-weight:900;padding:18px;border:none;border-radius:30px;font-size:1.25rem;cursor:pointer;box-shadow:0 8px 20px rgba(20,50,20,0.8);}
+#contact button:hover{background:rgba(20,60,20,1);color:#d9f0c6;box-shadow:0 12px 32px rgba(15,45,15,1);}
+/* Attractive Footer */
+.footer-glass {
+  margin-top: 80px;
+  background: linear-gradient(
+    135deg,
+    rgba(34, 80, 34, 0.65),
+    rgba(20, 60, 20, 0.75)
+  );
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  color: #e7f4df;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 30px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+}
+
+.footer-col h3,
+.footer-col h4 {
+  font-weight: 900;
+  margin-bottom: 18px;
+  color: #dff2d8;
+}
+
+.footer-col p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #d2ebc7;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+  color: #d2ebc7;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+  color: #ffffff;
+  padding-left: 6px;
+}
+
+/* Social icons */
+
+
+.social-icons a {
+  color: #333;
+  font-size: 20px;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #0077ff;
+}
+
+.social-icons {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: #ffffff;
+  transition: 0.4s;
+}
+
+.social-icons a:hover {
+  background: #c8f0b5;
+  color: #1c3a1c;
+  transform: translateY(-4px) scale(1.05);
+}
+
+/* Bottom bar */
+.footer-bottom {
+  text-align: center;
+  padding: 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.15);
+  color: #e1f2d7;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .footer-container {
+    text-align: center;
+  }
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+
+
+
+/* Animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+.fade-in{opacity:0;transform:translateY(30px);transition:.8s;}
+.fade-in.appear{opacity:1;transform:translateY(0);}
+
+/* Responsive */
+@media(max-width:900px){
+  #about{flex-direction:column;}
+  #about .about-img,#about .about-text{flex:1 1 100%;}
+}
+@media(max-width:768px){
+   nav ul {
+        position: fixed;
+        top: 77px;
+        right: -100%;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(12px);
+        flex-direction: column;  /* vertical stack */
+        justify-content: center;  /* vertical center */
+        align-items: center;      /* horizontal center */
+        gap: 35px;                /* spacing between links */
+        padding-top: 18px;           /* no extra padding */
+        transition: 0.4s;
+        z-index: 1000;
+    }
+  nav ul.show{right:0;}
+  .hamburger{display:flex;}
+}
+@media(max-width:480px){
+  header h1{font-size:2.6rem;}header p{font-size:1.2rem;}nav ul{gap:18px;font-size:.95rem;}
+  nav .logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  font-size:1.2rem;
+  letter-spacing:1.5px;
+  color: #0e7606f5;
+}
+  
+}
+</style>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+</head>
+<body>
+
+<nav>
+<div class="logo">
+  <img src="./image/logo.png" alt="Nikhil Plantation Logo">
+  <span>NIKHIL PLANTATION</span>
+</div>
+
+  <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+  <ul id="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header id="home">
+  <div class="hero-content">
+    <h1>Nikhil Plantation Pvt. Ltd.</h1>
+    <p>Growing a greener tomorrow with sustainable plantation solutions.</p>
+    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button>
+  </div>
+  <!-- Floating leaves -->
+  <div class="leaf" style="left:10%;animation-duration:12s;"></div>
+  <div class="leaf" style="left:30%;animation-duration:15s;"></div>
+  <div class="leaf" style="left:50%;animation-duration:18s;"></div>
+  <div class="leaf" style="left:70%;animation-duration:20s;"></div>
+  <div class="leaf" style="left:85%;animation-duration:17s;"></div>
+</header>
+
+<section id="about" class="fade-in" style="display:flex; flex-wrap:nowrap; gap:40px; align-items:flex-start; background:rgba(255,255,255,0.18); backdrop-filter:blur(10px); border-radius:25px; padding:50px; max-width:1100px; margin:0 auto;">
+
+  <div style="flex:1 1 350px; display:flex; flex-direction: column; gap:25px;">
+    <img src="./image/about1.png" alt="Green plantation field" style="width:100%; height:300px; border-radius:20px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); object-fit:cover;">
+    <img src="./image/about2.png" alt="Farmers working in plantation" style="width:100%; height:300px; border-radius:20px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); object-fit:cover;">
+    <img src="./image/about3.png" alt="Modern agricultural tools" style="width:100%; height:300px; border-radius:20px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); object-fit:cover;">
+  </div>
+
+  <div style="flex:2 1 600px; color:#1c3421; font-weight:600; font-size:1.15rem; line-height:1.7;">
+    <h2 style="color:#234d20; font-weight:900; margin-bottom:30px;">About Us</h2>
+    <p>At <strong>Nikhil Plantation Pvt. Ltd.</strong>, we are committed to cultivating excellence through sustainable agricultural practices and innovative land development. Founded with the mission to foster growth in the agricultural sector, we provide comprehensive plantation services that include land leasing, cold storage facilities, research, and crop production.</p>
+    <p>Our operations adhere strictly to the provisions of the Companies Act, 1956, ensuring full compliance and transparency. We engage with trusted partners and customers, providing not only quality produce but also reliable support, including financial services such as advance payments and deposits governed by banking regulations.</p>
+    <p>We specialize in acquiring and developing agricultural land through leases, sub-leases, and exchange agreements. Our expertise extends to obtaining necessary licenses and permissions, handling legal land tenures, and managing rights over the land to maximize productivity while maintaining environmental balance.</p>
+    <p>From planting and nurturing crops to cold storage and market distribution, Nikhil Plantation Pvt. Ltd. emphasizes scientific research and technological advancements to improve yield and quality. Our goal is to build a greener, healthier future by combining traditional knowledge with modern innovation.</p>
+  </div>
+
+</section>
+
+
+
+<section id="services" style="max-width:1100px; margin:60px auto; padding: 0 20px;">
+
+  <h2 style="text-align:center; font-size:3rem; font-weight:900; color:#234d20; margin-bottom:60px;">OUR SERVICES</h2>
+
+  <div class="service-row slide-in-left">
+    <div class="service-text">
+      <h3>🌱 Land Development & Leasing</h3>
+      <p>We lease and develop agricultural land for plantations and other uses, ensuring sustainable growth and modern management practices.</p>
+    </div>
+    <img src="./image/service1.png" alt="Land Development" />
+  </div>
+
+  <div class="service-row reverse slide-in-right">
+    <img src="./image/service2.png" alt="Cold Storage" />
+    <div class="service-text">
+      <h3>❄️ Cold Storage Facilities</h3>
+      <p>Modern cold storage plants to keep produce fresh, extend shelf life, and reduce post-harvest loss.</p>
+    </div>
+  </div>
+
+  <div class="service-row slide-in-left">
+    <div class="service-text">
+      <h3>🔬 Research & Development</h3>
+      <p>Innovating and improving agricultural techniques to boost productivity and crop quality.</p>
+    </div>
+    <img src="./image/service3.png" alt="Research" />
+  </div>
+
+  <div class="service-row reverse slide-in-right">
+    <img src="./image/service4.png" alt="Crop Production" />
+    <div class="service-text">
+      <h3>🌾 Crop Production & Sales</h3>
+      <p>Producing and distributing high-quality crops and plants with focus on sustainable agriculture.</p>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  /* Container and rows */
+  #services {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .service-row {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .service-row.reverse {
+    flex-direction: row-reverse;
+    transform: translateX(50px);
+  }
+
+  /* Text card */
+  .service-text {
+    background-color: #c7e3cd;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    color: #1c3421;
+    font-family: 'Segoe UI', sans-serif;
+    flex-shrink: 0;
+  }
+
+  .service-text h3 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+  }
+
+  .service-text p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  /* Images */
+  .service-row img {
+    width: 480px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .service-row img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Active slide-in */
+  .slide-in-left.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .slide-in-right.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .service-row, .service-row.reverse {
+      flex-direction: column;
+      gap: 30px;
+      text-align: center;
+      transform: translateX(0) !important;
+      opacity: 1 !important;
+    }
+
+    .service-text, .service-row img {
+      width: 100% !important;
+      max-width: none;
+      height: auto !important;
+      margin: 0 !important;
+    }
+  }
+</style>
+
+<script>
+  const serviceRows = document.querySelectorAll('.service-row');
+
+  function checkSlide() {
+    const triggerBottom = window.innerHeight * 0.85;
+    serviceRows.forEach(row => {
+      const rowTop = row.getBoundingClientRect().top;
+      if (rowTop < triggerBottom) {
+        row.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', checkSlide);
+  window.addEventListener('load', checkSlide);
+</script>
+
+
+
+<section id="gallery" style="padding:60px 20px;">
+
+  <!-- Heading on top -->
+  <h2 style="text-align:center; font-size:3rem; font-weight:900; color:#234d20; margin-bottom:60px;">Gallery</h2>
+
+  <!-- Gallery images container -->
+  <div class="gallery-container">
+
+    <!-- First row: 4 images -->
+    <div class="gallery-row">
+      <div class="image-container"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="IMAGE 1"></div>
+      <div class="image-container"><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80" alt="IMAGE 2"></div>
+      <div class="image-container"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80" alt="IMAGE 3"></div>
+      <div class="image-container"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=800&q=80" alt="IMAGE 4"></div>
+    </div>
+
+    <!-- Second row: 2 images centered -->
+    <div class="gallery-row center-row">
+      <div class="image-container"><img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=800&q=80" alt="IMAGE 5"></div>
+      <div class="image-container"><img src="https://images.unsplash.com/photo-1601987133564-9b3dbfdc4d8b?auto=format&fit=crop&w=800&q=80" alt="IMAGE 6"></div>
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+/* Gallery container */
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* space between rows */
+}
+
+/* Gallery rows */
+.gallery-row {
+  display: flex;
+  gap: 20px; /* space between images */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Center second row */
+.center-row {
+  justify-content: center;
+}
+
+/* Image container */
+.image-container {
+  width: 200px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .image-container {
+    width: 45%; /* 2 images per row */
+    height: 120px;
+  }
+}
+
+@media(max-width:480px){
+  .image-container {
+    width: 90%; /* 1 image per row */
+    height: 150px;
+  }
+}
+</style>
+
+
+<section id="contact" class="fade-in">
+  <h2>Contact Us</h2>
+  <form>
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Your full name" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="example@mail.com" required>
+    <label for="message">Message</label>
+    <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+<footer class="footer-glass">
+  <div class="footer-container">
+
+    <!-- Company Info -->
+    <div class="footer-col">
+      <h3>Nikhil Plantation Pvt. Ltd.</h3>
+      <p>
+        Growing a greener tomorrow through sustainable agricultural
+        practices, innovation, and responsible land development.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+<!-- Contact Info -->
+<div class="footer-col">
+  <h4>Contact</h4>
+  <p><i class="fas fa-map-marker-alt"></i> India</p>
+  <p><i class="fas fa-envelope"></i> abngroup2012@gmail.com</p>
+  <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+</div>
+
+
+<div class="footer-col">
+  <h4>Follow Us</h4>
+  <div class="social-icons">
+    <a href="#"><i class="fas fa-globe"></i></a>      <!-- Website -->
+    <a href="#"><i class="fab fa-facebook-f"></i></a> <!-- Facebook -->
+    <a href="#"><i class="fab fa-instagram"></i></a>  <!-- Instagram -->
+    <a href="#"><i class="fab fa-twitter"></i></a>    <!-- Twitter -->
+  </div>
+</div>
+
+
+  <div class="footer-bottom">
+    © 2026 Nikhil Plantation Pvt. Ltd. • All Rights Reserved
+  </div>
+</footer>
+<!-- Scroll To Top Button -->
+<button id="scrollTopBtn" aria-label="Scroll to top">
+  <svg class="progress-ring" width="60" height="60">
+    <circle class="progress-ring__circle"
+      stroke-width="4"
+      fill="transparent"
+      r="26"
+      cx="30"
+      cy="30"/>
+  </svg>
+  <span class="leaf-icon">🌿</span>
+</button>
+
+
+
+<script>
+// Hamburger toggle
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('nav-links');
+hamburger.addEventListener('click',()=>{
+  hamburger.classList.toggle('active');
+  navLinks.classList.toggle('show');
+});
+
+// Smooth scroll & fade-in
+document.querySelectorAll('nav ul li a').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const targetId=link.getAttribute('href').slice(1);
+    document.getElementById(targetId).scrollIntoView({behavior:'smooth'});
+    if(window.innerWidth<768){hamburger.classList.remove('active');navLinks.classList.remove('show');}
+  });
+});
+
+const faders=document.querySelectorAll('.fade-in');
+const observer=new IntersectionObserver((entries,obs)=>{
+  entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('appear');obs.unobserve(entry.target);}});
+},{threshold:0.2,rootMargin:"0px 0px -50px 0px"});
+faders.forEach(fader=>observer.observe(fader));
+
+// Create falling leaves dynamically
+const totalLeaves=25;
+for(let i=0;i<totalLeaves;i++){
+  const leaf=document.createElement('div');
+  leaf.className='falling-leaf';
+  leaf.style.left=Math.random()*100+'vw';
+  leaf.style.width=15+Math.random()*25+'px';
+  leaf.style.height=15+Math.random()*25+'px';
+  leaf.style.animationDuration=5+Math.random()*15+'s';
+  leaf.style.animationDelay=Math.random()*15+'s';
+  leaf.style.opacity=0.4+Math.random()*0.6;
+  document.body.appendChild(leaf);
+}
+const scrollBtn = document.getElementById("scrollTopBtn");
+const circle = document.querySelector(".progress-ring__circle");
+const circumference = 2 * Math.PI * 26;
+
+circle.style.strokeDasharray = circumference;
+
+function updateProgress() {
+  const scrollTop = window.scrollY;
+const docHeight = Math.max(
+  document.documentElement.scrollHeight - window.innerHeight,
+  1
+);
+const progress = scrollTop / docHeight;
+
+  const offset = circumference - progress * circumference;
+
+  circle.style.strokeDashoffset = offset;
+
+  // Show / hide
+  if (scrollTop > 300) {
+    scrollBtn.classList.add("show");
+  } else {
+    scrollBtn.classList.remove("show");
+  }
+
+  // Color change by depth
+  scrollBtn.classList.remove("scrolled-mid", "scrolled-deep");
+  if (progress > 0.3) scrollBtn.classList.add("scrolled-mid");
+  if (progress > 0.65) scrollBtn.classList.add("scrolled-deep");
+}
+
+window.addEventListener("scroll", updateProgress);
+
+// Smooth scroll to top
+scrollBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+const footer = document.querySelector("footer");
+
+function hideNearFooter() {
+  const footerTop = footer.getBoundingClientRect().top;
+
+  if (footerTop < window.innerHeight - 120) {
+    scrollBtn.classList.remove("show");
+    scrollBtn.style.pointerEvents = "none";
+  } else {
+    scrollBtn.style.pointerEvents = "auto";
+  }
+}
+
+
+window.addEventListener("scroll", hideNearFooter);
+
+updateProgress();
+
+</script>
+</body>
+</html>
